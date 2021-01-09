@@ -3,6 +3,7 @@ require 'logger'
 module SurveyGizmo
   class Logger < ::Logger
     def format_message(severity, timestamp, progname, message)
+      message = message.dup
       if (api_token = SurveyGizmo.configuration.api_token)
         message.gsub!(
           /#{Regexp.quote(api_token)}|#{Regexp.quote(CGI.escape(api_token))}/,
